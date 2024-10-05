@@ -8,7 +8,7 @@ import Select from "./Select";
 import Input from "./Input";
 import PostCard from "./PostCard";
 import Login from "./Login";
-
+import RTE from "./RTE";
 
 export { 
     Header, 
@@ -21,4 +21,5 @@ export {
     Select,
     PostCard,
     Login,
+    RTE,
 };
