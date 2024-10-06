@@ -38,14 +38,18 @@ function PostForm({post}) {
                 navigate(`/post/${dbPost.$id}`)
             }
         } else {
-            const file = data.image[0] ? fileService.uploadFile(data.image[0]) : null;
-
+            const file = fileService.uploadFile(data.image[0]);
+            console.log(file.$id);
             if(file) {
                 const fileId = file.$id;
+                // console.log(fileId);
                 data.featuredImage = fileId;
+                // console.log(data.featuredImage);
+                // console.log(data);
                 const dbPost = await databaseService.createPost({
                     ...data,
-                    userId: userData.$id
+                    userId: userData.$id,
+                    featuredImage: data.image
                 })
                 if(dbPost) {
                     navigate(`/post/${dbPost.$id}`)
@@ -71,6 +75,7 @@ function PostForm({post}) {
                 setValue('slug', slugTransform(value.title),  {shouldValidate: true})
             }
         })
+        return () => subscription.unsubscribe();
     },[watch, slugTransform, setValue])
 
   return (
