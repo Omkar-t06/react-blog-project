@@ -38,21 +38,15 @@ function PostForm({post}) {
                 navigate(`/post/${dbPost.$id}`)
             }
         } else {
-            const file = fileService.uploadFile(data.image[0]);
-            console.log(file.$id);
-            if(file) {
+            const file = await fileService.uploadFile(data.image[0]);
+
+            if (file) {
                 const fileId = file.$id;
-                // console.log(fileId);
                 data.featuredImage = fileId;
-                // console.log(data.featuredImage);
-                // console.log(data);
-                const dbPost = await databaseService.createPost({
-                    ...data,
-                    userId: userData.$id,
-                    featuredImage: data.image
-                })
-                if(dbPost) {
-                    navigate(`/post/${dbPost.$id}`)
+                const dbPost = await databaseService.createPost({ ...data, userId: userData.$id });
+
+                if (dbPost) {
+                    navigate(`/post/${dbPost.$id}`);
                 }
             }
         }
@@ -109,7 +103,7 @@ function PostForm({post}) {
         {post && (
             <div className="w-full mb-4">
                 <img
-                src={appwriteService.getFilePreview(post.featuredImage)}
+                src={fileService.getFilePreview(post.featuredImage)}
                 alt={post.title}
                 className="rounded-lg"
                 />
