@@ -41,7 +41,7 @@ function Header() {
       <Container>
         <nav className='flex'>
           <div className='mr-4'>
-            <Link to='/'><Logo width='70px'/></Link>
+            <Link to='/'><Logo width='50px'/></Link>
           </div>
           <ul className='flex mx-auto'>
             {
